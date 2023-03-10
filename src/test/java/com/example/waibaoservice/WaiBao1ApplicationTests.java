@@ -2,13 +2,13 @@ package com.example.waibaoservice;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.waibaoservice.mapper.UserMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.waibaoservice.pojo.AccessToken;
 import com.waibaoservice.utils.WeiXinUtils.WeiXinRequestUtils;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,6 +17,41 @@ import java.util.Map;
 
 @SpringBootTest(classes = WaiBao1ApplicationTests.class)
 class WaiBao1ApplicationTests {
+
+    @Test
+    public void testPushMessage() {
+        final String s = WeiXinRequestUtils.pushMessage("oFhHZ4v5IU1GAVJbC-NUaIC0VPKM");
+        System.out.println(s);
+    }
+
+    @Test
+    public void testData() {
+        Map<String, String> data = new HashMap<>();
+        final ObjectMapper objectMapper = new ObjectMapper();
+        data.put("a", "b");
+        final String s;
+        try {
+            s = objectMapper.writeValueAsString(data);
+            System.out.println(s);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void testUrl() {
+        String res = WeiXinRequestUtils.getAccessToken();
+        System.out.println(res);
+        final ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            final AccessToken accessToken = objectMapper.readValue(res, AccessToken.class);
+            System.out.println(accessToken);
+        } catch (JsonProcessingException e) {
+            System.out.println("exception");
+            e.printStackTrace();
+        }
+    }
 
     @Test
     public void testDate() {
@@ -34,7 +69,7 @@ class WaiBao1ApplicationTests {
 
     @Test
     public void testWeiXinRequest() {
-        String result = WeiXinRequestUtils.sendGet("jjjj");
+        String result = WeiXinRequestUtils.getUserInfo("jjjj");
         System.out.println(result);
     }
 

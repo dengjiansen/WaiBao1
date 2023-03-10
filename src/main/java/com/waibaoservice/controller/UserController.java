@@ -25,7 +25,7 @@ public class UserController {
     @ResponseBody
     public User login(@RequestBody User user) throws JsonProcessingException {
         // 向微信发送请求
-        String json_str = WeiXinRequestUtils.sendGet(user.getCode());
+        String json_str = WeiXinRequestUtils.getUserInfo(user.getCode());
         System.out.println(json_str);
         return userService.userLogin(json_str);
     }

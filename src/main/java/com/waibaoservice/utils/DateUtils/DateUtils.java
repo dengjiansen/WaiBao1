@@ -28,6 +28,10 @@ public class DateUtils {
         return sdf.format(endDate);
     }
 
+    public static String getCurrentTimeStr(Date d) {
+        return sdf.format(d);
+    }
+
     public static Date parseDateStr(String dateStr) {
         try {
             return sdf.parse(dateStr);
