@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/sub")
 public class SubscribeController {
 
+    // 向用户发送订阅通知
     @PostMapping("/subscribe")
     @ResponseBody
     public boolean subscribeMessage(@RequestBody User user) {

@@ -9,7 +9,6 @@ public class StatusCode {
    private Integer errcode;
    private String errmsg;
    private Long msgid;
-   private String rid;
 
     public Long getMsgid() {
         return msgid;
@@ -35,11 +34,4 @@ public class StatusCode {
         this.errmsg = errmsg;
     }
 
-    public String getRid() {
-        return rid;
-    }
-
-    public void setRid(String rid) {
-        this.rid = rid;
-    }
 }

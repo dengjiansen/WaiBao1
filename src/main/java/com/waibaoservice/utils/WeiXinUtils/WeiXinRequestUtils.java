@@ -83,7 +83,8 @@ public class WeiXinRequestUtils {
             outputStream.flush();
 
             // 读取响应
-            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
+            BufferedReader reader =
+                    new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
             String line;
             StringBuilder rest = new StringBuilder();
             while (null != (line = reader.readLine())){
