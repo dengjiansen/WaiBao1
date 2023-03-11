@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.waibaoservice.pojo.AccessToken;
+import com.waibaoservice.utils.MqttUtils.MqttUtils;
 import com.waibaoservice.utils.WeiXinUtils.WeiXinRequestUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +18,12 @@ import java.util.Map;
 
 @SpringBootTest(classes = WaiBao1ApplicationTests.class)
 class WaiBao1ApplicationTests {
+
+    @Test
+    public void testMqtt() {
+        MqttUtils.setPublisherId("cancelTimer");
+        MqttUtils.publish("Hello World");
+    }
 
     @Test
     public void testPushMessage() {

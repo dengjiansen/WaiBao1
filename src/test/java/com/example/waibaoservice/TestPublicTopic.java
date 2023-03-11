@@ -52,6 +52,7 @@ public class TestPublicTopic {
     }
 
     public static void main(String[] args) {
+        MqttUtils.setPublisherId("cancelTimer");
         MqttUtils.publish("DJS");
     }
 }

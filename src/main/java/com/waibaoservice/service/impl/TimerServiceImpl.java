@@ -3,7 +3,6 @@ package com.waibaoservice.service.impl;
 import com.waibaoservice.mapper.TimerMapper;
 import com.waibaoservice.pojo.Timer;
 import com.waibaoservice.service.TimerService;
-import com.waibaoservice.timertask.TimerTask;
 import com.waibaoservice.utils.DateUtils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,6 +70,9 @@ public class TimerServiceImpl implements TimerService {
     @Override
     public boolean cancelTimer(Timer timer) {
         synchronized (this) {
+            // 向Mqtt服务器发送信息
+//            MqttUtils.setPublisherId("cancelTimer");
+//            MqttUtils.publish("cancel Task");
             int res;
             res = mapper.removeTimer(timer.getOpenid());
             if (res == 1) {
@@ -89,6 +91,7 @@ public class TimerServiceImpl implements TimerService {
     public String getEndTime(Timer timer) {
         Timer t = mapper.selectTimerByOpenId(timer.getOpenid());
         if (t != null) {
+            System.out.println("endTime : " + t.getEnd_time());
             return t.getEnd_time();
         }
         return "no task";

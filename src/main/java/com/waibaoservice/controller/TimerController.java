@@ -23,7 +23,9 @@ public class TimerController {
     public String getEndTime(@RequestBody Timer timer) {
         if (timer != null) {
             System.out.println("用户:" + timer.getOpenid() + "访问getEndTime");
-            return timerService.getEndTime(timer);
+            String endTime = timerService.getEndTime(timer);
+            System.out.println("endTime : " + endTime);
+            return endTime;
         }
         return "no task";
     }
@@ -33,6 +35,7 @@ public class TimerController {
     @ResponseBody
     public boolean setTimer(@RequestBody Timer timer) {
         if (timer != null) {
+            System.out.println(timer);
             System.out.println("用户:" + timer.getOpenid() + "访问setTimer");
             return timerService.setTimer(timer);
         }
@@ -43,6 +46,7 @@ public class TimerController {
     @PostMapping("/removeTimer")
     @ResponseBody
     public boolean removeTimer(@RequestBody Timer timer) {
+        System.out.println(timer);
         if (timer != null) {
             System.out.println("用户:" + timer.getOpenid() + "访问removeTimer");
             return timerService.cancelTimer(timer);

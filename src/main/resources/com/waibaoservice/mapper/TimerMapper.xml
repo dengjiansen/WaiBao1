@@ -37,6 +37,6 @@
         select * from tb_user_timer
     </select>
     <select id="selectTimerByOpenId" resultType="com.waibaoservice.pojo.Timer">
-        select openid from tb_user_timer where openid = #{openid}
+        select * from tb_user_timer where openid = #{openid}
     </select>
 </mapper>

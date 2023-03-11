@@ -3,6 +3,8 @@ package com.example.waibaoservice;
 import com.waibaoservice.utils.MqttUtils.MqttCallBackAdapter;
 import com.waibaoservice.utils.MqttUtils.MqttUtils;
 import org.eclipse.paho.client.mqttv3.*;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 
 /**
@@ -10,7 +12,19 @@ import org.eclipse.paho.client.mqttv3.*;
  * Date create 14:28 2023/2/22
  * Modified By DJS
  **/
+@SpringBootTest(classes = TestSubscribeTopic.class)
 public class TestSubscribeTopic {
+
+    @Test
+    public void testMqtt() {
+        MqttUtils.setSubscribeId("cancelTimer");
+        MqttUtils.subscribe(new MqttCallBackAdapter() {
+            @Override
+            public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
+                System.out.println(mqttMessage);
+            }
+        });
+    }
 
     static void test() {
         String broker = "tcp://test.ranye-iot.net:1883";
@@ -50,6 +64,7 @@ public class TestSubscribeTopic {
     }
 
     public static void main(String[] args) {
+        MqttUtils.setSubscribeId("cancelTimer");
         MqttUtils.subscribe(new MqttCallBackAdapter(){
             @Override
             public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
