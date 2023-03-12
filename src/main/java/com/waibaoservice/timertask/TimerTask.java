@@ -4,6 +4,7 @@ import com.waibaoservice.mapper.TimerMapper;
 import com.waibaoservice.pojo.Timer;
 import com.waibaoservice.utils.BeanUtils.SpringContextUtils;
 import com.waibaoservice.utils.DateUtils.DateUtils;
+import com.waibaoservice.utils.WeiXinUtils.WeiXinRequestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
@@ -46,7 +47,11 @@ public class TimerTask implements Runnable{
                         synchronized (this) {
                             // 更新数据库
                             int ret = timerMapper.removeTimer(timer.getOpenid());
-                            if (ret == 1) System.out.println("定时任务结束, openid:" + timer.getOpenid());
+                            if (ret == 1) {
+                                System.out.println("定时任务结束, openid:" + timer.getOpenid());
+                                // 发送用户订阅消息, 通知定时结束
+                                WeiXinRequestUtils.pushMessage(timer.getOpenid());
+                            }
                             else {
                                 // 如果没有数据受影响，说明数据不一致，需要更新
                                 timers = timerMapper.selectAllTimer();
@@ -54,8 +59,6 @@ public class TimerTask implements Runnable{
                             }
                             // 更新缓存
                             timers = timerMapper.selectAllTimer();
-                            // 向微信服务器发送请求，向用户推消息
-
                             // 提前结束循环, 避免更新时异常
                             break;
                         }
