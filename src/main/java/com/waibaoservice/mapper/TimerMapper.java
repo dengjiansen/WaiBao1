@@ -10,15 +10,15 @@ import java.util.List;
 @Repository
 public interface TimerMapper {
     int addTimer(@Param("openid")String openid,
-                 @Param("session_key")String session_key,
+                 @Param("device_id")String deviceId,
                  @Param("unionid")String unionId,
                  @Param("end_time")String dateStr);
 
-    int removeTimer(@Param("openid")String openid);
-    int updateTimerByOpenId(@Param("openid")String openid,
-                    @Param("end_time")String dateStr);
+    int removeTimerByDeviceId(@Param("device_id")String device_id);
+    int updateTimerByDeviceId(@Param("device_id")String deviceId,
+                              @Param("end_time")String dateStr);
 
     List<Timer> selectAllTimer();
-    Timer selectTimerByOpenId(@Param("openid")String openid);
+    Timer selectTimerByDeviceId(@Param("device_id")String deviceId);
     Timer selectAll();
 }

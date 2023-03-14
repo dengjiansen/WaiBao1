@@ -1,5 +1,6 @@
 package com.waibaoservice;
 
+import com.waibaoservice.timertask.DeviceTask;
 import com.waibaoservice.timertask.TimerTask;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -27,7 +28,9 @@ public class WaiBao1Application {
     public static void main(String[] args) {
         SpringApplication.run(WaiBao1Application.class, args);
         new Thread(new TimerTask()).start();
+        new Thread(new DeviceTask()).start();
     }
+
     @Bean
     public WebMvcRegistrations mvcRegistrations() {
         return new WebMvcRegistrations() {

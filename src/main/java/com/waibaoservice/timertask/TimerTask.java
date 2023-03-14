@@ -5,10 +5,6 @@ import com.waibaoservice.pojo.Timer;
 import com.waibaoservice.utils.BeanUtils.SpringContextUtils;
 import com.waibaoservice.utils.DateUtils.DateUtils;
 import com.waibaoservice.utils.WeiXinUtils.WeiXinRequestUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
@@ -32,6 +28,7 @@ public class TimerTask implements Runnable{
 
     @Override
     public void run() {
+        System.out.println("Timer Task Start");
         while (loopCondition) {
             // 保证一次加载
             if (timerMapper != null && !mapperCondition) {
@@ -46,7 +43,7 @@ public class TimerTask implements Runnable{
                     if (currentDate.after(endDate)) {
                         synchronized (this) {
                             // 更新数据库
-                            int ret = timerMapper.removeTimer(timer.getOpenid());
+                            int ret = timerMapper.removeTimerByDeviceId(timer.getDevice_id());
                             if (ret == 1) {
                                 System.out.println("定时任务结束, openid:" + timer.getOpenid());
                                 // 发送用户订阅消息, 通知定时结束

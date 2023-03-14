@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.waibaoservice.mapper.DeviceMapper">
+
+    <insert id="addDevice">
+        insert into tb_device_info (
+            device_id,
+            openid
+        ) values (
+            #{device_id},
+            #{openid}
+       )
+    </insert>
+    <select id="getDeviceList" resultType="com.waibaoservice.pojo.Device">
+        select * from tb_device_info where openid = #{openid}
+    </select>
+</mapper>

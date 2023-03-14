@@ -7,10 +7,10 @@ package com.waibaoservice.pojo;
  **/
 public class Timer {
     private String openid;
-    private String session_key;
     private String unionid;
     private String end_time;
     private String positive_time;
+    private String device_id;
 
     public String getOpenid() {
         return openid;
@@ -18,14 +18,6 @@ public class Timer {
 
     public void setOpenid(String openid) {
         this.openid = openid;
-    }
-
-    public String getSession_key() {
-        return session_key;
-    }
-
-    public void setSession_key(String session_key) {
-        this.session_key = session_key;
     }
 
     public String getUnionid() {
@@ -52,11 +44,18 @@ public class Timer {
         this.positive_time = positive_time;
     }
 
+    public String getDevice_id() {
+        return device_id;
+    }
+
+    public void setDevice_id(String device_id) {
+        this.device_id = device_id;
+    }
+
     @Override
     public String toString() {
         return "Timer{" +
                 "openid='" + openid + '\'' +
-                ", session_key='" + session_key + '\'' +
                 ", unionid='" + unionid + '\'' +
                 ", end_time='" + end_time + '\'' +
                 ", positive_time='" + positive_time + '\'' +

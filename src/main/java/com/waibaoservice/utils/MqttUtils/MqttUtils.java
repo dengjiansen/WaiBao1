@@ -61,7 +61,7 @@ public class MqttUtils {
                 }
                 MqttMessage msg = new MqttMessage(bytes);
                 msg.setQos(QOS);
-                Thread.sleep(10000); // 设置延迟10秒发送
+                Thread.sleep(5000); // 设置延迟5秒发送
                 publisher.publish(topic, msg);
                 publisher.disconnect(); // 断开连接
                 publisher.close();
@@ -73,11 +73,14 @@ public class MqttUtils {
 
     // 从服务器接收消息
     public static void subscribe(MqttCallback callBack) {
-        if (subscribe != null) {
+        if (subscribe != null ) {
             try {
                 subscribe.setCallback(callBack);
                 // 连接至服务器
-                subscribe.connect(options);
+                if (!subscribe.isConnected()) {
+                    System.out.println("subscribe is in the connection");
+                    subscribe.connect(options);
+                }
                 Thread.sleep(5000);
                 subscribe.subscribe(topic, QOS);
             } catch (MqttException | InterruptedException e) {

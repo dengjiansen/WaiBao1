@@ -7,26 +7,26 @@
     <insert id="addTimer">
         insert into tb_user_timer(
             openid,
-            session_key,
+            device_id
             unionid,
             end_time
         ) values (
             #{openid},
-            #{session_key},
+            #{device_id},
             #{unionid},
             #{end_time}
         )
     </insert>
 
-    <update id="updateTimerByOpenId">
+    <update id="updateTimerByDeviceId">
         update
             tb_user_timer
         set end_time = #{end_time}
-        where openid = #{openid}
+        where device_id = #{device_id}
     </update>
 
-    <delete id="removeTimer">
-        delete from tb_user_timer where openid = #{openid}
+    <delete id="removeTimerByDeviceId">
+        delete from tb_user_timer where device_id = #{device_id}
     </delete>
 
     <select id="selectAll" resultType="com.waibaoservice.pojo.Timer">
@@ -36,7 +36,8 @@
     <select id="selectAllTimer" resultType="com.waibaoservice.pojo.Timer">
         select * from tb_user_timer
     </select>
-    <select id="selectTimerByOpenId" resultType="com.waibaoservice.pojo.Timer">
-        select * from tb_user_timer where openid = #{openid}
+
+    <select id="selectTimerByDeviceId" resultType="com.waibaoservice.pojo.Timer">
+        select * from tb_user_timer where device_id = #{device_id}
     </select>
 </mapper>

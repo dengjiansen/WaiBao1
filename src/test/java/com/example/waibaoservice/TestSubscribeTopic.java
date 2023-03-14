@@ -64,7 +64,7 @@ public class TestSubscribeTopic {
     }
 
     public static void main(String[] args) {
-        MqttUtils.setSubscribeId("cancelTimer");
+//        MqttUtils.setSubscribeId("cancelTimer");
         MqttUtils.subscribe(new MqttCallBackAdapter(){
             @Override
             public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
